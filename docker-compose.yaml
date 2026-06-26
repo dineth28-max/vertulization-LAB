@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: notesapp-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: notesdb
+      POSTGRES_USER: notesuser
+      POSTGRES_PASSWORD: notespass
+    ports:
+      - "5432:5432"
+    volumes:
+      - notesapp_db_data:/var/lib/postgresql/data
+    networks:
+      - notesapp-net
+
+  web:
+    build: ./web
+    image: notesapp-web:latest
+    container_name: notesapp-web
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      DB_HOST: notesapp-db
+      DB_PORT: "5432"
+      DB_NAME: notesdb
+      DB_USER: notesuser
+      DB_PASSWORD: notespass
+    ports:
+      - "5000:5000"
+    networks:
+      - notesapp-net
+
+networks:
+  notesapp-net:
+    name: notesapp-net
+
+volumes:
+  notesapp_db_data:
+    name: notesapp_db_data

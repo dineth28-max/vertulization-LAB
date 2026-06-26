@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Notes App</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 16px; }
+    h1 { color: #2c3e50; }
+    form { display: flex; gap: 8px; margin-bottom: 24px; }
+    input[type=text] { flex: 1; padding: 8px; font-size: 1rem; }
+    button { padding: 8px 16px; font-size: 1rem; cursor: pointer; }
+    ul { list-style: none; padding: 0; }
+    li { display: flex; justify-content: space-between; align-items: center;
+         padding: 10px; border-bottom: 1px solid #eee; }
+    .meta { color: #888; font-size: 0.8rem; }
+    .del-btn { background: #e74c3c; color: white; border: none; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Notes App</h1>
+  <p class="meta">Web container talking to Postgres at host: {{ db_host }}</p>
+
+  <form action="/add" method="post">
+    <input type="text" name="content" placeholder="Write a note..." required>
+    <button type="submit">Add</button>
+  </form>
+
+  <ul>
+    {% for note in notes %}
+    <li>
+      <span>{{ note[1] }} <span class="meta">({{ note[2] }})</span></span>
+      <form action="/delete/{{ note[0] }}" method="post">
+        <button class="del-btn" type="submit">Delete</button>
+      </form>
+    </li>
+    {% else %}
+    <li>No notes yet. Add one above.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
