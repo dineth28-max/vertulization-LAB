@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-# prepare-app.sh
-# Builds the custom web image and creates the network + named volume
-# used by the Notes App. Safe to re-run (idempotent).
+
 set -euo pipefail
 
 NETWORK_NAME="notesapp-net"

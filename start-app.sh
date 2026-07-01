@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-# start-app.sh
-# Starts (or creates, on first run) the db and web containers, wires them
-# onto the shared network/volume, sets a restart policy, and prints the
-# URL to access the app. Safe to re-run: existing stopped containers are
-# just started again so persisted state is never reset.
+
 set -euo pipefail
 
 NETWORK_NAME="notesapp-net"

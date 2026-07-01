@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-# remove-app.sh
-# Removes every resource created by prepare-app.sh / start-app.sh:
-# containers, the custom image, the network, and the named volume.
-# This resets the app back to a completely clean slate (data is lost).
+
 set -euo pipefail
 
 NETWORK_NAME="notesapp-net"
